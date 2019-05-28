@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>愉快地使用TypeScript开发React Native应用 - 一寸欢喜</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="杨俊宁,"> 
+    <meta name="description" content="这是杨俊宁写博客的地方，This is youngjuning&#39;s blog,从 React Native 0.57 版本开始，我们终于可以直接使用 TypeScript 开发，不需要任何额外的配置。本文主要介绍如何使用 TypeScript 优雅地开发 React Nati,"> 
+    <meta name="author" content="杨俊宁"> 
+    <link rel="alternative" href="atom.xml" title="一寸欢喜" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">一寸欢喜</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://youngjuning.js.org"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">愉快地使用TypeScript开发React Native应用</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">愉快地使用TypeScript开发React Native应用</h1>
+        <div class="stuff">
+            <span>五月 26, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/ESLint/">ESLint</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/EditorConfig/">EditorConfig</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/JSX/">JSX</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Prettier/">Prettier</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/airbnb/">airbnb</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/husky/">husky</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/lint-staged/">lint-staged</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/pre-commit/">pre-commit</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/root-import/">root-import</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>从 <a href="http://t.cn/EKvlU2T" target="_blank" rel="noopener">React Native 0.57</a> 版本开始，我们终于可以直接使用 TypeScript 开发，不需要任何额外的配置。本文主要介绍如何使用 TypeScript 优雅地开发 React Native 应用。</p>
+<h1 id="一、初始化项目"><a href="#一、初始化项目" class="headerlink" title="一、初始化项目"></a>一、初始化项目</h1><blockquote>
+<p>初始化项目之前，请确保已经按照 <a href="http://t.cn/RmXTnUP" target="_blank" rel="noopener">React Native 中文网</a> 的搭建开发环境文档完成了环境搭建</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ react-native init AwesomeProject</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意: 入口文件 <code>index.js</code> 需要保留，其他文件都可以使用 <code>.ts</code> 或 <code>.tsx</code> 后缀。</p>
+</blockquote>
+<h1 id="二、TypeScript-编译器"><a href="#二、TypeScript-编译器" class="headerlink" title="二、TypeScript 编译器"></a>二、TypeScript 编译器</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yarn global add typescript</span><br><span class="line">$ yarn add -D typescript @types/react @types/react-native</span><br></pre></td></tr></table></figure>
+<h1 id="三、配置-tsconfig-json"><a href="#三、配置-tsconfig-json" class="headerlink" title="三、配置 tsconfig.json"></a>三、配置 tsconfig.json</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tsc --init --pretty --target esnext --allowJs --checkJs --jsx react-native --allowSyntheticDefaultImports --experimentalDecorators --emitDecoratorMetadata</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：注意多余的注释可能会不兼容，需要移除，详细文档可查阅 <a href="http://t.cn/EK2CuWP" target="_blank" rel="noopener">编译选项</a>。</p>
+</blockquote>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><h3 id="tsconfig-json"><a href="#tsconfig-json" class="headerlink" title="tsconfig.json"></a>tsconfig.json</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"compilerOptions"</span>: &#123;</span><br><span class="line">    <span class="attr">"target"</span>: <span class="string">"esnext"</span>,</span><br><span class="line">    <span class="attr">"module"</span>: <span class="string">"commonjs"</span>,</span><br><span class="line">    <span class="attr">"allowJs"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"checkJs"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"jsx"</span>: <span class="string">"react"</span>,</span><br><span class="line">    <span class="attr">"strict"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"allowSyntheticDefaultImports"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"esModuleInterop"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"experimentalDecorators"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"emitDecoratorMetadata"</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"exclude"</span>: [<span class="string">"node_modules"</span>, <span class="string">"**/*.js"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>解释:</strong></p>
+<ul>
+<li><code>target</code>: 指定 ECMAScript 目标版本 “ES3”（默认），”ES5”，”ES6”/“ES2015”，”ES2016”，”ES2017”，”ES2018”, “ES2019” 或 “ESNext”。</li>
+<li><code>mode</code>: 指定生成哪个模块系统代码：”None”，”CommonJS”，”AMD”，”System”，”UMD”，”ES6”， “ES2015” 或 “ESNext”。</li>
+<li><code>allowJs</code>: 允许编译 javascript 文件。</li>
+<li><code>checkJs</code>: 在 <code>.js</code> 文件中报告错误。与 <code>--allowJs</code> 配合使用。</li>
+<li><code>jsx</code>: 在 .tsx 文件里支持 JSX： “react”、”react-native”或 “preserve”。查看 <a href="http://t.cn/EK2hSmk" target="_blank" rel="noopener">JSX</a>。</li>
+<li><code>strict</code>: 启用所有严格类型检查选项。启用 <code>--strict</code> 相当于启用 <code>--noImplicitAny</code>, <code>--noImplicitThis</code>, <code>--alwaysStrict</code>， <code>--strictNullChecks</code> 和 <code>--strictFunctionTypes</code> 和<code>--strictPropertyInitialization</code>。</li>
+<li><code>allowSyntheticDefaultImports</code>: 允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。</li>
+<li><code>esModuleInterop</code>: TypeScript 与 Babel 采取了不同的方案，并且直到现在，还没出现真正地固定标准。 简单地说，如果你使用 Babel，Webpack 或 React Native，并期望与你以往使用地不同的导入行为，TypeScript 提供了该编译选项。</li>
+<li><code>experimentalDecorators</code>: 启用实验性的 ES 装饰器。</li>
+<li><code>给源码里的装饰器声明加上设计类型元数据。</code>: 给源码里的装饰器声明加上设计类型元数据。</li>
+</ul>
+<h1 id="四、EsLint-代码检测"><a href="#四、EsLint-代码检测" class="headerlink" title="四、EsLint 代码检测"></a>四、EsLint 代码检测</h1><p>Lint 工具用于检查代码的语法是否正确、风格是否符合要求。最新的工具 ESLint 不仅允许你自定义语法规则，还允许用户创造插件，改变默认的 JavaScript 语法，比如支持 ES6 和 JSX 的语法。</p>
+<h2 id="VsCode-支持"><a href="#VsCode-支持" class="headerlink" title="VsCode 支持"></a>VsCode 支持</h2><h3 id="安装-ESLint-Plugin"><a href="#安装-ESLint-Plugin" class="headerlink" title="安装 ESLint Plugin"></a>安装 ESLint Plugin</h3><p><img src="https://i.loli.net/2019/05/12/5cd800f36779f.jpg" alt></p>
+<h3 id="配置-ESLint-Plugin"><a href="#配置-ESLint-Plugin" class="headerlink" title="配置 ESLint Plugin"></a>配置 ESLint Plugin</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"eslint.validate"</span>: [</span><br><span class="line">    <span class="string">"javascript"</span>,</span><br><span class="line">    <span class="string">"javascriptreact"</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"language"</span>: <span class="string">"typescript"</span>,</span><br><span class="line">      <span class="attr">"autoFix"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"language"</span>: <span class="string">"typescriptreact"</span>,</span><br><span class="line">      <span class="attr">"autoFix"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"language"</span>: <span class="string">"vue"</span>,</span><br><span class="line">      <span class="attr">"autoFix"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"language"</span>: <span class="string">"html"</span>,</span><br><span class="line">      <span class="attr">"autoFix"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"eslint.autoFixOnSave"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>eslint.validate</code>：ESLint 插件默认只校验 javascript 和 javascriptreact，所以需要手动开启其他语言的校验支持</li>
+<li><code>eslint.autoFixOnSave</code>: 开启保存时自动修复错误</li>
+</ul>
+<h2 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h2><blockquote>
+<p>注意：配置之前请确保根目录下存在 <code>.eslintrc.js</code>。如果要指定忽略某些文件，可以使用 <code>.eslintignore</code> 文件（node_modules、bower_compnents 文件夹已经默认被忽略）</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add -D eslint eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react eslint-plugin-react-native @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-import-resolver-typescript</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://cn.eslint.org/" target="_blank" rel="noopener">eslint</a>: 可组装的 JavaScript 和 JSX 检查工具</li>
+<li><a href="http://t.cn/RKfLS6c" target="_blank" rel="noopener">eslint-config-airbnb</a>: 该软件包提供 Airbnb 的 <code>.eslintrc</code> 作为可扩展的共享配置</li>
+<li><a href="http://t.cn/R9D22Jm" target="_blank" rel="noopener">eslint-plugin-jsx-a11y</a>: 用于 JSX 元素的可访问性规则的静态 AST 检查器。</li>
+<li><a href="http://t.cn/ESs9ZxL" target="_blank" rel="noopener">eslint-plugin-import</a>: 此插件旨在支持 ES2015 +（ES6 +）导入/导出语法的 linting。</li>
+<li><a href="http://t.cn/R9D22Jm" target="_blank" rel="noopener">eslint-plugin-react</a>: ESLint React 校验规则插件</li>
+<li><a href="http://t.cn/EK2Hf83eslint-plugin-react-native" target="_blank" rel="noopener">eslint-plugin-react-native</a>: 针对 ESLint 的 React Native 特定 linting 规则</li>
+<li><a href="http://t.cn/ESsqPWt" target="_blank" rel="noopener">@typescript-eslint/parser</a>: 将 TypeScript 转换为 ESTree，使 eslint 可以识别</li>
+<li><a href="http://t.cn/ESsVcqc" target="_blank" rel="noopener">@typescript-eslint/eslint-plugin</a>: 一个包含一堆特定于 TypeScript 的 ESLint 规则的插件</li>
+<li><a href="http://t.cn/EK2QgeN" target="_blank" rel="noopener">eslint-import-resolver-typescript</a>: 给 eslint-plugin-import 添加 typescript 支持的插件</li>
+</ul>
+<h3 id="配置文件-1"><a href="#配置文件-1" class="headerlink" title="配置文件"></a>配置文件</h3><p><strong>.eslintrc.js:</strong></p>
+<p>由于文件过长，这里不做展示，具体配置<a href="http://t.cn/EoqF7WE" target="_blank" rel="noopener">请戳</a></p>
+<p><strong>.eslintignore:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># /node_modules/* and /bower_components/* ignored by default</span><br></pre></td></tr></table></figure>
+<h1 id="五、Prettier-代码格式化"><a href="#五、Prettier-代码格式化" class="headerlink" title="五、Prettier 代码格式化"></a>五、Prettier 代码格式化</h1><p>ESLint 能够检测出代码中的潜在问题，提高代码质量，但是并不能完全统一代码风格。而 Prettier 在格式化代码方面具有更大优势。Prettier 扫描文件中的样式问题，并自动重新格式化代码，以确保缩进、间距、分号、单引号和双引号等遵循一致的规则。</p>
+<h2 id="VsCode-支持-1"><a href="#VsCode-支持-1" class="headerlink" title="VsCode 支持"></a>VsCode 支持</h2><blockquote>
+<p>如果你只是想要格式化你的 JS 或 TS 代码，你可以忽略这一部分</p>
+</blockquote>
+<h3 id="安装-Prettier-Plugin"><a href="#安装-Prettier-Plugin" class="headerlink" title="安装 Prettier Plugin"></a>安装 Prettier Plugin</h3><p><img src="https://i.loli.net/2019/05/12/5cd80379c9b41.jpg" alt></p>
+<h3 id="配置-Prettier-Plugin"><a href="#配置-Prettier-Plugin" class="headerlink" title="配置 Prettier Plugin"></a>配置 Prettier Plugin</h3><blockquote>
+<p>注意：除了以下配置，建议你把其他格式化插件，比如 beautify 直接卸载，并配置 prettier 为默认格式化程序。</p>
+</blockquote>
+<ul>
+<li><code>prettier.requireConfig</code>: 需要项目中存在一个 prettierconfig 文件才能运行 prettier</li>
+<li><code>editor.formatOnSave</code>: 开启保存时自动格式化</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"prettier.requireConfig"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"editor.formatOnSave"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>配置规则:</strong></p>
+<p><img src="https://i.loli.net/2019/05/12/5cd805ed333da.jpg" alt></p>
+<h2 id="Prettier-与-ESLint-配合使用"><a href="#Prettier-与-ESLint-配合使用" class="headerlink" title="Prettier 与 ESLint 配合使用"></a>Prettier 与 ESLint 配合使用</h2><p>完成上一部分 VSCode 的支持，再配置一个 PrettierConfig 文件你就可以使用 Prettier 的功能了。但是当样式出问题时，编辑器并不会给你报错。更糟糕的是，ESLint 和 Prettier 在格式化规则方面存在一些冲突。幸运的是，Prettier 被设计为易于与 ESLint 集成，所以你可以轻松在项目中使两者，而无需担心冲突。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add prettier eslint-config-prettier eslint-plugin-prettier -D</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="http://t.cn/R1kvfYq" target="_blank" rel="noopener">prettier</a>: 主 prettier 库</li>
+<li><a href="http://t.cn/ESsWd0H" target="_blank" rel="noopener">eslint-config-prettier</a>: 关闭所有不必要或可能与 prettier 的规则冲突的 ESLint 规则。</li>
+<li><a href="http://t.cn/ESslahh" target="_blank" rel="noopener">eslint-plugin-prettier</a>: 以 ESLint 插件的形式运行 prettier</li>
+</ul>
+<h3 id="配置文件-2"><a href="#配置文件-2" class="headerlink" title="配置文件"></a>配置文件</h3><p><strong>.eslintrc.js:</strong></p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  extends: [</span><br><span class="line"><span class="addition">+   'prettier',</span></span><br><span class="line"><span class="addition">+   'plugin:prettier/recommended',</span></span><br><span class="line"><span class="addition">+   'prettier/react',</span></span><br><span class="line"><span class="addition">+   'prettier/@typescript-eslint',</span></span><br><span class="line">  ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>.eslintignore:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># /node_modules/* and /bower_components/* ignored by default</span><br></pre></td></tr></table></figure>
+<h3 id="prettierrc-js"><a href="#prettierrc-js" class="headerlink" title=".prettierrc.js"></a>.prettierrc.js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  semi: <span class="literal">false</span>, <span class="comment">// 行位是否使用分号，默认为true</span></span><br><span class="line">  trailingComma: <span class="string">'es5'</span>, <span class="comment">// 是否使用尾逗号，有三个可选值"&lt;none|es5|all&gt;"</span></span><br><span class="line">  singleQuote: <span class="literal">true</span>, <span class="comment">// 字符串是否使用单引号，默认为false，使用双引号</span></span><br><span class="line">  printWidth: <span class="number">120</span>, <span class="comment">// 一行的字符数，如果超过会进行换行，默认为80</span></span><br><span class="line">  tabWidth: <span class="number">2</span>, <span class="comment">// 一个tab代表几个空格数</span></span><br><span class="line">  bracketSpacing: <span class="literal">true</span>, <span class="comment">// 对象大括号直接是否有空格，默认为true，效果：&#123; foo: bar &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="prettierinore"><a href="#prettierinore" class="headerlink" title=".prettierinore"></a>.prettierinore</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**/node_modules/*</span><br></pre></td></tr></table></figure>
+<h1 id="六、EditorConfig-跨编辑器配置统一"><a href="#六、EditorConfig-跨编辑器配置统一" class="headerlink" title="六、EditorConfig 跨编辑器配置统一"></a>六、EditorConfig 跨编辑器配置统一</h1><p>当多人共同开发一个项目的时候，往往会出现大家用不同编辑器的情况。就前端开发者来说，有人喜欢 Sublime，有人喜欢 Webstorm , 也有人喜欢 Atom，还有人喜欢 Vim，HBuilder 等等。各种不同编程语言的开发者喜欢各种不同的编辑器。EditorConfig 这个项目就是为了解决跨编辑器开发项目的代码风格统一问题的。</p>
+<h2 id="VSCode-Plugin"><a href="#VSCode-Plugin" class="headerlink" title="VSCode Plugin"></a>VSCode Plugin</h2><p>安装完后不需要配置，直接在项目中添加配置文件即可。</p>
+<p><img src="https://i.loli.net/2019/05/12/5cd82aae0c7c4.jpg" alt></p>
+<h2 id="配置文件-3"><a href="#配置文件-3" class="headerlink" title="配置文件"></a>配置文件</h2><p><strong>.editorconfig:</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># EditorConfig is awesome: http://EditorConfig.org</span><br><span class="line"></span><br><span class="line"># top-most EditorConfig file</span><br><span class="line">root = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"># Unix-style newlines with a newline ending every file</span><br><span class="line">[*]</span><br><span class="line">indent_style = space</span><br><span class="line">indent_size = <span class="number">2</span></span><br><span class="line">end_of_line = lf</span><br><span class="line">charset = utf<span class="number">-8</span></span><br><span class="line">trim_trailing_whitespace = <span class="literal">true</span></span><br><span class="line">insert_final_newline = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[*.md]</span><br><span class="line">trim_trailing_whitespace = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">[*.gradle]</span><br><span class="line">indent_size = <span class="number">4</span></span><br><span class="line"></span><br><span class="line">[BUCK]</span><br><span class="line">indent_size = <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h1 id="七、Git-pre-commit-Hook"><a href="#七、Git-pre-commit-Hook" class="headerlink" title="七、Git pre-commit Hook"></a>七、Git pre-commit Hook</h1><p><code>pre-commit</code>钩子在键入提交信息前运行。 它用于检查即将提交的快照，例如，检查是否有所遗漏，确保测试运行，以及核查代码。 如果该钩子以非零值退出，Git 将放弃此次提交，不过你可以用<code>git commit --no-verify</code>来绕过这个环节。 你可以利用该钩子，来检查代码风格是否一致（运行类似 lint 的程序）、尾随空白字符是否存在（自带的钩子就是这么做的），或新方法的文档是否适当。</p>
+<h2 id="husky-轻松使用-Git-hooks"><a href="#husky-轻松使用-Git-hooks" class="headerlink" title="husky: 轻松使用 Git hooks"></a>husky: 轻松使用 Git hooks</h2><blockquote>
+<p>Husky 能阻止坏的 <code>git commit</code>, <code>git push</code> 和更多的 💩</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add -D husky</span><br></pre></td></tr></table></figure>
+<h3 id="配置文件-4"><a href="#配置文件-4" class="headerlink" title="配置文件"></a>配置文件</h3><p><strong>.huskyrc.js:</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  hooks: &#123;</span><br><span class="line">    <span class="string">'pre-commit'</span>: <span class="string">'node node_modules/eslint/bin/eslint.js --fix src/**/*.js'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：测试发现直接运行 <code>eslint --fix</code> 使用的是全局的模块。</p>
+</blockquote>
+<h3 id="只使用-husky-的问题"><a href="#只使用-husky-的问题" class="headerlink" title="只使用 husky 的问题"></a>只使用 husky 的问题</h3><ul>
+<li>性能问题：对整个项目运行一个 lint 进程很慢，而且 linting 结果可能无关紧要。</li>
+<li>效率问题：遗留代码仓库上工作的同学很快会遇到新的问题，开启 Lint 初期，你可能会面临成千上万的 Lint Error 需要修复。部分同学对下面这个图可能并不陌生：只改了文件 A，但是文件 B、C、D 中也有大量错误。</li>
+</ul>
+<h2 id="lint-staged-husky-的好帮手"><a href="#lint-staged-husky-的好帮手" class="headerlink" title="lint-staged: husky 的好帮手"></a>lint-staged: husky 的好帮手</h2><blockquote>
+<p>针对暂存的 git 文件运行 linters 并且不要让 💩 滑入你的代码库！对暂存区概念不熟悉的同学可以看下<a href="http://t.cn/EKqRqT8" target="_blank" rel="noopener">git-简明指南</a></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add -D husky lint-staged</span><br></pre></td></tr></table></figure>
+<ul>
+<li>husky: 被用来添加一些 git 钩子，这里我们需要一个用 <code>pre-commit</code> 在每次 <code>git commit</code> 操作时执行 <code>lint-staged</code> 命令。</li>
+<li>lint-staged: 可以对 git 暂存区文件(也就是你想要 commit 的文件)执行一些操作，这样做即提高了性能又提高了效率。</li>
+</ul>
+<h3 id="配置文件-5"><a href="#配置文件-5" class="headerlink" title="配置文件"></a>配置文件</h3><p><strong>.huskyrc.js:</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  hooks: &#123;</span><br><span class="line">    <span class="string">'pre-commit'</span>: <span class="string">'lint-staged'</span>,</span><br><span class="line">    <span class="string">'**/*.&#123;md,json&#125;'</span>: [<span class="string">'prettier --write'</span>, <span class="string">'git add'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>lint-staged.config.js:</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="string">'src/**/*.&#123;js,jsx,ts,tsx&#125;'</span>: [<span class="string">'eslint --fix'</span>, <span class="string">'git add'</span>],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="八、相对于根目录引入组件"><a href="#八、相对于根目录引入组件" class="headerlink" title="八、相对于根目录引入组件"></a>八、相对于根目录引入组件</h1><p>这部分不是必须的，配置也有些繁琐。这里我就只介绍下简单的配置，详细文档请请查阅 <a href="http://t.cn/EKGpjPF" target="_blank" rel="noopener">babel-plugin-root-import</a>。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add -D babel-plugin-root-import eslint-import-resolver-babel-plugin-root-import</span><br></pre></td></tr></table></figure>
+<h2 id="配置文件-6"><a href="#配置文件-6" class="headerlink" title="配置文件"></a>配置文件</h2><p><strong>babel.config.js:</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  ...</span><br><span class="line">  plugins: [</span><br><span class="line">    [</span><br><span class="line">      <span class="string">'babel-plugin-root-import'</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        rootPathSuffix: <span class="string">'src'</span>,</span><br><span class="line">        rootPathPrefix: <span class="string">'~'</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  ],</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>.eslintrc.js</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  settings: &#123;</span><br><span class="line">    <span class="string">'import/resolver'</span>: &#123;</span><br><span class="line">      <span class="string">'babel-plugin-root-import'</span>: &#123;</span><br><span class="line">        rootPathSuffix: <span class="string">'src'</span>,</span><br><span class="line">        rootPathPrefix: <span class="string">'~'</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>tsconfig.json:</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"compilerOptions"</span>: &#123;</span><br><span class="line">    <span class="attr">"baseUrl"</span>: <span class="string">"."</span>,</span><br><span class="line">    <span class="attr">"paths"</span>: &#123;</span><br><span class="line">      <span class="attr">"~/*"</span>: [<span class="string">"src/*"</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="九、支持-jsx"><a href="#九、支持-jsx" class="headerlink" title="九、支持 .jsx"></a>九、支持 .jsx</h1><p>React Native 都已经内置支持 TypeScript 了，但是却不支持 <code>.jsx</code> 文件后缀。如果你想要使用 <code>.jsx</code> 开发，可以配置 <code>metro.config.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  resolver: &#123;</span><br><span class="line">    sourceExts: [<span class="string">'ts'</span>, <span class="string">'tsx'</span>, <span class="string">'js'</span>, <span class="string">'jsx'</span>, <span class="string">'json'</span>, <span class="string">'mjs'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="十、相关资料"><a href="#十、相关资料" class="headerlink" title="十、相关资料"></a>十、相关资料</h1><ul>
+<li><a href="http://t.cn/EKLRSDv" target="_blank" rel="noopener">Using ESLint and Prettier in a TypeScript Project</a>: TypeScript、ESLint、Prettier、VSCode</li>
+<li><a href="http://t.cn/EKLEN2O" target="_blank" rel="noopener">使用 ESLint + Prettier 简化代码 Review 过程</a>: Zeit Now、DevOps</li>
+<li><a href="http://t.cn/EKLE22f" target="_blank" rel="noopener">用 Prettier 和 ESlint 来统一提交代码</a>: ESLint、Prettier、husky、lint-staged</li>
+<li><a href="http://t.cn/RBxTDYi" target="_blank" rel="noopener">用 ESLint 和 Prettier 写出高质量代码</a>：ESLint、Prettier、husky、lint-staged</li>
+<li><a href="http://t.cn/RBsXRgG" target="_blank" rel="noopener">使用 ESLint+Prettier 来统一前端代码风格</a>：ESLint、Prettier</li>
+<li><a href="http://t.cn/EKqu03I" target="_blank" rel="noopener">使用 ESLint ＆ Prettier 美化 Vue 代码</a>：Vue、ESLint、Prettier、husky、lint-staged、填坑</li>
+<li><a href="http://t.cn/RSvWkOI" target="_blank" rel="noopener">用 husky 和 lint-staged 构建超溜的代码检查工作流</a>: husky、lint-staged</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="https://link.hhtjim.com/163/491905281.mp3,https://link.hhtjim.com/163/1356867253.mp3,https://link.hhtjim.com/163/551155811.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="true" data-ci="44bf80d2663662f124f8" data-cs="e13df49a67a73b8d6b1bfa9e7e8d4485907c532d" data-r="youngjuning" data-o="youngjuning" data-a="youngjuning" data-d="true">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

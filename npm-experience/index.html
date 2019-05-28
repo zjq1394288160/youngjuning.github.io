@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NPM 经验之谈 - 一寸欢喜</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="杨俊宁,"> 
+    <meta name="description" content="这是杨俊宁写博客的地方，This is youngjuning&#39;s blog,全局 npm
+npm 的全局安装包位置: C:\Users\youngjuning\AppData\Roaming\npm
+npm 的全局 cache 位置: C:\Users\youngjunin,"> 
+    <meta name="author" content="杨俊宁"> 
+    <link rel="alternative" href="atom.xml" title="一寸欢喜" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">一寸欢喜</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://youngjuning.js.org"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">NPM 经验之谈</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">NPM 经验之谈</h1>
+        <div class="stuff">
+            <span>五月 27, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/未完成/">未完成</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/经验之谈/">经验之谈</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="全局-npm"><a href="#全局-npm" class="headerlink" title="全局 npm"></a>全局 npm</h2><ul>
+<li>npm 的全局安装包位置: <code>C:\Users\youngjuning\AppData\Roaming\npm</code></li>
+<li>npm 的全局 cache 位置: <code>C:\Users\youngjuning\AppData\Roaming\npm-cache</code></li>
+</ul>
+<h2 id="npm-版本升级"><a href="#npm-版本升级" class="headerlink" title="npm 版本升级"></a>npm 版本升级</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install npm@latest -g</span><br></pre></td></tr></table></figure>
+<h2 id="Node-js-版本升级"><a href="#Node-js-版本升级" class="headerlink" title="Node.js 版本升级"></a>Node.js 版本升级</h2><p><a href="http://ksria.com/gnvm/" target="_blank" rel="noopener">GNVM</a>: 使用 Go 语言编写的 Node.js 多版本管理器</p>
+<h2 id="代理管理"><a href="#代理管理" class="headerlink" title="代理管理"></a>代理管理</h2><p><a href="https://github.com/Pana/nrm" target="_blank" rel="noopener">nrm</a>: NPM registry 管理工具</p>
+<p>配置后可通过下面方式来验证是否成功:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config get registry</span><br></pre></td></tr></table></figure>
+<h2 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h2><ul>
+<li><a href="https://github.com/GoogleChromeLabs/ndb" target="_blank" rel="noopener">ndb</a>: ndb 是针对 Node.js 的改进调试体验，由 Chrome DevTools 启用</li>
+<li><a href="https://github.com/remy/nodemon" target="_blank" rel="noopener">nodemon</a>: nodemon 用来监视 node.js 应用程序中的任何更改并自动重启服务,非常适合用在开发环境中。</li>
+</ul>
+<h2 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a>守护进程</h2><ul>
+<li><a href="https://github.com/foreverjs/forever" target="_blank" rel="noopener">forever</a>: forever 是一个简单的命令式 nodejs 的守护进程，能够启动，停止，重启 App 应用</li>
+<li><a href="https://github.com/Unitech/pm2" target="_blank" rel="noopener">pm2</a>: 内置负载均衡的 Node.js 生产环境进程管理器</li>
+</ul>
+<h2 id="发布一个公有的-Org-作用域包"><a href="#发布一个公有的-Org-作用域包" class="headerlink" title="发布一个公有的 Org 作用域包"></a>发布一个公有的 Org 作用域包</h2><blockquote>
+<p><a href="http://t.cn/AiKJxoPo" target="_blank" rel="noopener">Creating and publishing an Org scoped package</a></p>
+</blockquote>
+<h2 id="解决一些模块下载慢问题"><a href="#解决一些模块下载慢问题" class="headerlink" title="解决一些模块下载慢问题"></a>解决一些模块下载慢问题</h2><p>###</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载node源码加速：</span></span><br><span class="line">$ npm config <span class="built_in">set</span> registry https://npm.taobao.org/mirrors/node</span><br><span class="line"><span class="comment"># 下载node源码加速:</span></span><br><span class="line">$ npm config <span class="built_in">set</span> disturl https://npm.taobao.org/mirrors/node</span><br><span class="line"><span class="comment"># 然后将electron包下载地址注册位淘宝的镜像:</span></span><br><span class="line">$ npm config <span class="built_in">set</span> ELECTRON_MIRROR https://npm.taobao.org/mirrors/electron/</span><br></pre></td></tr></table></figure>
+<h3 id="node-sass"><a href="#node-sass" class="headerlink" title="node-sass"></a>node-sass</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config <span class="built_in">set</span> sass-binary-site http://npm.taobao.org/mirrors/node-sass</span><br></pre></td></tr></table></figure>
+<h3 id="新建包"><a href="#新建包" class="headerlink" title="新建包"></a>新建包</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir /path/to/package/directory</span><br><span class="line">$  npm init --scope=&lt;your_org_name&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="发布包"><a href="#发布包" class="headerlink" title="发布包"></a>发布包</h3><p>将 Org 作用域包发布为 public，使用</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm publish --access public</span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="https://link.hhtjim.com/163/491905281.mp3,https://link.hhtjim.com/163/1356867253.mp3,https://link.hhtjim.com/163/551155811.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="true" data-ci="44bf80d2663662f124f8" data-cs="e13df49a67a73b8d6b1bfa9e7e8d4485907c532d" data-r="youngjuning" data-o="youngjuning" data-a="youngjuning" data-d="true">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
